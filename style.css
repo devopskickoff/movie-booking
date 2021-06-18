@@ -1,0 +1,19 @@
+.seats {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+    display: flex;
+}
+
+.seat {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    margin: 1px;
+    color: white;
+}
+
+.occupied {
+    background-color: gray;
+    color:black;
+}
