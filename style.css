@@ -1,19 +1,29 @@
 .seats {
-    width: 500px;
-    height: 500px;
+    width: 150px;
+    height: 150px;
     border: 1px solid black;
     display: flex;
+    background-color: blueviolet;
+    flex-wrap: wrap;
+    padding: 20px;
 }
 
 .seat {
-    width: 20px;
+    border-top-left-radius : 8px;
+    border-top-right-radius : 8px;
+    width: 18%;
     height: 20px;
     background-color: black;
     margin: 1px;
     color: white;
 }
 
-.occupied {
-    background-color: gray;
+.selected {
+    background-color: blue;
     color:black;
+}
+
+.occupied {
+    background-color: white;
+    color: black;
 }
