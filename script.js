@@ -1,23 +1,49 @@
-let aladdinOccupied = ["F","G","J"];
-let cocoOccupied = ["Z"];
-let frozenOccupied = ["A","B"];
+let all = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+let aladdin = ["F", "G", "J"];
+let coco = ["Y"];
+let frozen = ["A", "B"];
 //초기화 전부 불러오기
 //seatArr[i]값이 true면 클래스에 occupied붙이기
 //색도 그레이로 바꾸기
 //진짜 아예 점유된 애들은 바꿔야댐
 
 //점유된 자리만 선점된 자리로 표시하기
-function loadSeatList(seatArr){
-  
+function loadSeatList(seatArr) {
+  if (seatArr) {
+    for (var i = 0; i < seatArr.length; i++) {
+      document.getElementById(`${seatArr[i]}`).classList.add("occupied");
+    }
+  }
 }
 
-//자리리셋
-function seatListReset(){
- var seats = document.getElementsByClassName("seat");
- for(var i = 0; i < seats.length; i++){
-   seats[i].classList.remove("occupied");
-   seats[i].classList.remove("selected");
- }
+//자리목록과 확인창 리셋
+function seatListReset() {
+  var seats = document.getElementsByClassName("seat");
+  for (var i = 0; i < seats.length; i++) {
+    seats[i].classList.remove("occupied");
+    seats[i].classList.remove("selected");
+  }
+  document.getElementsByClassName("seatResult")[0].textContent = "";
+}
+
+function selectDefault() {
+  document.getElementById("movieList").addEventListener("change", function () {
+    seatListReset();
+    var movieTitle = document.querySelector("#movieList > option:checked").value;
+    switch (movieTitle) {
+      case "all":
+        loadSeatList(all);
+        break;
+      case "aladdin":
+        loadSeatList(aladdin);
+        break;
+      case "coco":
+        loadSeatList(coco);
+        break;
+      case "frozen":
+        loadSeatList(frozen);
+    }
+  });
 }
 
 //onclick시 이벤트 넣기
@@ -51,6 +77,9 @@ function checkSeatList() {
   seatResultDiv.textContent = returnResult;
 }
 
-
+//초기화
+// loadSeatList(ALL)
+seatListReset();
+selectDefault();
 seatOnclickEvent();
 returnPrice();
