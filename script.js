@@ -1,3 +1,4 @@
+//점유된 좌석만 배열에 담기
 let all = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 let aladdin = ["F", "G", "J"];
 let coco = ["Y"];
@@ -78,7 +79,7 @@ function checkSeatList() {
 }
 
 //초기화
-// loadSeatList(ALL)
+//loadSeatList();
 seatListReset();
 selectDefault();
 seatOnclickEvent();

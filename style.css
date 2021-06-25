@@ -1,29 +1,71 @@
-.seats {
-    width: 150px;
-    height: 150px;
-    border: 1px solid black;
+html {
+    height: 100%;
+}
+body {
+    background-color: rgb(51, 27, 82);
+    height: 100%;
     display: flex;
-    background-color: blueviolet;
-    flex-wrap: wrap;
-    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.seat {
-    border-top-left-radius : 8px;
-    border-top-right-radius : 8px;
-    width: 18%;
-    height: 20px;
-    background-color: black;
-    margin: 1px;
+.movie_select {
     color: white;
 }
 
+.theater_container{
+    width: 270px;
+    height: 100px;
+    margin: 20px auto;
+    color: blueviolet;
+    background-color: white;
+    transform: perspective(5px) rotateX(-0.2deg);
+    text-align: center;
+    font-weight: bold;
+    line-height: 100px;
+    box-shadow: 0 3px 20px rgb(255 255 255 / 90%);
+}
+
+.seats {
+    width: 200px;
+    display: flex;
+    background-color: rgb(88, 43, 146);
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: auto;
+}
+
+.seat {
+    width: 16%;
+    height: 20px;
+    margin: 10px 1px;
+    color: white;
+    background-color: black;
+    border-top-left-radius : 8px;
+    border-top-right-radius : 8px;
+    text-align: center;
+}
+
+.seat:nth-of-type(5n+1) {
+    margin-right: 15px;
+}
+
+.seat:nth-of-type(5n+5) {
+    margin-left: 15px;
+}
+
 .selected {
-    background-color: blue;
+    background-color: rgb(215, 129, 241);
     color:black;
 }
 
 .occupied {
     background-color: white;
     color: black;
+}
+
+.movie_content {
+    width: 300px;
+    margin: auto;
 }
