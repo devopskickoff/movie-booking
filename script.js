@@ -1,29 +1,56 @@
-let all = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 let aladdin = ["F", "G", "J"];
 let coco = ["Y"];
 let frozen = ["A", "B"];
-//초기화 전부 불러오기
-//seatArr[i]값이 true면 클래스에 occupied붙이기
-//색도 그레이로 바꾸기
-//진짜 아예 점유된 애들은 바꿔야댐
+let myMovie = [];
 
-//점유된 자리만 선점된 자리로 표시하기
-function loadSeatList(seatArr) {
-  if (seatArr) {
-    for (var i = 0; i < seatArr.length; i++) {
-      document.getElementById(`${seatArr[i]}`).classList.add("occupied");
-    }
+
+//예약정보가 있으면 바로 모달로 티켓을 볼 수 있도록함
+function loadModal(){
+  //초기에는 모달 안보임
+  var modal = document.getElementsByClassName("modal")[0];
+  // 로컬 스토리지에 내 예약내역이 있으면 모달을 보이게
+  var myMovie = localStorage.getItem("myMovie");  
+  if(myMovie){
+    console.log(myMovie);
+    alert("영화 예매 정보가 있습니다");
+    let ticketContent = document.getElementsByClassName("ticket-content")[0];
+    console.log(myMovie[0]);
+    ticketContent.textContent += myMovie[0];
+    modal.style.display = "block";
+  } else {
+    console.log(myMovie)
+    modal.style.display = "none";
+    loadSeatList();  
   }
 }
 
-//자리목록과 확인창 리셋
+//처음접속시와 영화선택이 없을 경우 seat는 모두 hidden 처리, 선택된 영화가 있을시 hidden을 다시 block처리, 점유된 자리만 선점된 자리로 표시하기
+function loadSeatList(seatArr) {
+  var seats = document.getElementsByClassName("seat");
+  if(seatArr==null){
+    for(var i = 0;i < seats.length; i++){
+      seats[i].style.display = "none";
+    } 
+  } else {
+      if (seatArr) {
+        for(var i = 0;i < seats.length; i++){
+          seats[i].style.display = "block";
+        }
+        for (var i = 0; i < seatArr.length; i++) {
+          document.getElementById(`${seatArr[i]}`).classList.add("occupied");
+        }
+      }
+    } 
+}
+
+//모든 좌석의 클래스 초기화
 function seatListReset() {
   var seats = document.getElementsByClassName("seat");
   for (var i = 0; i < seats.length; i++) {
     seats[i].classList.remove("occupied");
     seats[i].classList.remove("selected");
   }
-  document.getElementsByClassName("seatResult")[0].textContent = "";
+  //document.getElementsByClassName("seatResult")[0].textContent = "";
 }
 
 function selectDefault() {
@@ -32,7 +59,7 @@ function selectDefault() {
     var movieTitle = document.querySelector("#movieList > option:checked").value;
     switch (movieTitle) {
       case "all":
-        loadSeatList(all);
+        loadSeatList();
         break;
       case "aladdin":
         loadSeatList(aladdin);
@@ -58,7 +85,7 @@ function seatOnclickEvent() {
   }
 }
 
-//확인 누를시 총 시트리스트 확인
+//확인 누를시 총 시트리스트 확인, 로컬스토리지에 저장하고 모달창 띄우기
 function returnPrice() {
   var btn1 = document.getElementById("btn1");
   btn1.addEventListener("click", checkSeatList);
@@ -66,19 +93,34 @@ function returnPrice() {
 
 //체크하고 price div에 자리 넣어주기, 변수값 바꿔주기
 function checkSeatList() {
+  var movieTitle = document.querySelector("#movieList > option:checked").value;
   var seatResultDiv = document.getElementsByClassName("seatResult")[0];
   var seats = document.getElementsByClassName("selected");
   var returnResult = "";
   for (var i = 0; i < seats.length; i++) {
-    //returnResult에 담아주기
     returnResult += seats[i].innerHTML;
-    //변수값을 바꿔주기(localstorage용)
   }
-  seatResultDiv.textContent = returnResult;
+  //로컬스토리지에 저장
+  localStorage.setItem("myMovie",[movieTitle,returnResult]);
+  loadModal();
+
+}
+
+//예매취소
+function ticketCancel(){
+  document.getElementById("btnCancel").addEventListener("click",function(){
+    localStorage.removeItem("myMovie");
+    var modal = document.getElementsByClassName("modal")[0];
+    // 로컬 스토리지에 내 예약내역이 있으면 모달을 보이게
+    modal.style.display = "none";
+    loadSeatList();
+  });
 }
 
 //초기화
-// loadSeatList(ALL)
+loadModal();
+//loadSeatList();
+ticketCancel();
 seatListReset();
 selectDefault();
 seatOnclickEvent();
