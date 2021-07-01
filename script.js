@@ -11,14 +11,20 @@ function loadModal(){
   // 로컬 스토리지에 내 예약내역이 있으면 모달을 보이게
   var myMovie = localStorage.getItem("myMovie");  
   if(myMovie){
-    console.log(myMovie);
-    alert("영화 예매 정보가 있습니다");
-    let ticketContent = document.getElementsByClassName("ticket-content")[0];
-    console.log(myMovie[0]);
-    ticketContent.textContent += myMovie[0];
+    let ticketMovieImg = document.getElementsByClassName("ticket-movieImg")[0];
+    let ticketMovieTitle = document.getElementsByClassName("ticket-movieTitle")[0];
+    let ticketMovieSeats= document.getElementsByClassName("ticket-movieSeats")[0];
+    var myMovie = JSON.parse(myMovie);
+    var myMovieTitle = myMovie['movieTitle'];
+    ticketMovieImg.style.backgroundImage = `url('img/${myMovieTitle}.jpg')`;
+    var myMovieSeat = myMovie['seat'];    
+    ticketMovieTitle.textContent = myMovieTitle;
+    ticketMovieSeats.textContent = ""; 
+    for(var i =0;i<myMovieSeat.length;i++){
+      ticketMovieSeats.textContent += myMovieSeat[i]+"석 ";
+    }
     modal.style.display = "block";
   } else {
-    console.log(myMovie)
     modal.style.display = "none";
     loadSeatList();  
   }
@@ -55,20 +61,25 @@ function seatListReset() {
 
 function selectDefault() {
   document.getElementById("movieList").addEventListener("change", function () {
+    var btn1 = document.getElementById("btn1");
     seatListReset();
     var movieTitle = document.querySelector("#movieList > option:checked").value;
     switch (movieTitle) {
       case "all":
         loadSeatList();
+        btn1.style.display = "none";
         break;
       case "aladdin":
         loadSeatList(aladdin);
+        btn1.style.display = "inline-block";
         break;
       case "coco":
         loadSeatList(coco);
+        btn1.style.display = "inline-block";
         break;
       case "frozen":
         loadSeatList(frozen);
+        btn1.style.display = "inline-block";
     }
   });
 }
@@ -94,32 +105,33 @@ function returnPrice() {
 //체크하고 price div에 자리 넣어주기, 변수값 바꿔주기
 function checkSeatList() {
   var movieTitle = document.querySelector("#movieList > option:checked").value;
-  var seatResultDiv = document.getElementsByClassName("seatResult")[0];
+  // var seatResultDiv = document.getElementsByClassName("seatResult")[0];
   var seats = document.getElementsByClassName("selected");
-  var returnResult = "";
-  for (var i = 0; i < seats.length; i++) {
-    returnResult += seats[i].innerHTML;
+  if(seats.length>4){
+    alert("최대 4개의 좌석까지 선택 가능합니다");
+  }else{
+    var objSeats = [];
+    if(seats.length!=0){
+      for (var i = 0; i < seats.length; i++) {
+        objSeats[i] = seats[i].id;
+      }    
+    //로컬스토리지에 저장
+      localStorage.setItem("myMovie",JSON.stringify({movieTitle:movieTitle,seat:objSeats}));
+      loadModal();    
+    }
   }
-  //로컬스토리지에 저장
-  localStorage.setItem("myMovie",[movieTitle,returnResult]);
-  loadModal();
-
 }
 
 //예매취소
 function ticketCancel(){
   document.getElementById("btnCancel").addEventListener("click",function(){
     localStorage.removeItem("myMovie");
-    var modal = document.getElementsByClassName("modal")[0];
-    // 로컬 스토리지에 내 예약내역이 있으면 모달을 보이게
-    modal.style.display = "none";
-    loadSeatList();
+    location.reload();
   });
 }
 
 //초기화
 loadModal();
-//loadSeatList();
 ticketCancel();
 seatListReset();
 selectDefault();

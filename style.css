@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    background-color: rgb(51, 27, 82);
+    background-color: rgb(238, 238, 238);
     height: 100%;
     display: flex;
     justify-content: center;
@@ -12,25 +12,35 @@ body {
     flex-direction: column;
 }
 header {
-
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 40px;
 }
 
+.movieList {
+    margin-top: 20px;
+    width: 300px;
+    height: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+}
 .screen-container {
     width: 270px;
     height: 100px;
     margin: 20px auto;
-    color: blueviolet;
-    background-color: white;
+    color: white;
+    background-color: black;
     transform: perspective(5px) rotateX(-0.2deg);
     text-align: center;
     font-weight: bold;
     line-height: 100px;
-    box-shadow: 0 3px 20px rgb(255 255 255 / 90%);
+    box-shadow: 0 3px 20px rgb(0 0 0 / 90%);
+    font-family: 'Permanent Marker', cursive;
+    font-size: 35px;
 }
 .movie_content{
     width: 300px;
+    height: 500px;
     margin: auto;
-
 }
 
 .seats {
@@ -52,6 +62,8 @@ header {
     border-top-left-radius : 8px;
     border-top-right-radius : 8px;
     text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
 }
 
 .seat:nth-of-type(5n+1) {
@@ -63,7 +75,7 @@ header {
 }
 
 .selected {
-    background-color: blue;
+    background-color: rgb(250, 212, 0);
     color:black;
 }
 
@@ -80,18 +92,20 @@ header {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgb(150, 92, 204);
+    background-color: rgb(0 0 0 );
 }
 
 .ticket {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 /* ticket.html */
 .ticket-img {
-    width: 500px;
-    height: 500px;
+    width: 384px;
+    height: 512px;
     background-image: url("img/ticket.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -99,14 +113,49 @@ header {
 
 }
 
+.ticket-movieImg {
+    width: 250px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.ticket-movieTitle {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 40px;
+    color: black;
+}
+
 .ticket-content{
     position: absolute;
-    color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 30px;
 }
 
 .content {
     display: block;
     justify-content: center;
 }
+.container{
+    display: flex;
+    flex-direction: column;
+}
 
+#btn1{
+    width: 200px;
+    margin: auto;
+    display: none;
+}
 
+#btnCancel{
+    width: 90px;
+    height: 30px;
+    border: 0;
+    background-color: transparent;
+    color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+}

@@ -7,15 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <header>예매하기</header>
+    <header><예매하기></header>
     <section>
         <div class="container">
             <div class="movie_content">
                 <div class="movie_select">
-                    <select name="movieList" id="movieList">
+                    <select name="movieList" class="movieList" id="movieList" >
                         <option value="all" selected>영화선택</option>
                         <option value="aladdin">알라딘</option>
                         <option value="coco">코코</option>
@@ -52,17 +55,19 @@
                         <div class="seat" id="W">W</div>
                         <div class="seat" id="X">X</div>
                         <div class="seat" id="Y">Y</div>
-
                     </div>
                     <button id="btn1">확인</button>
-                    <!-- <div class="seatResult"></div> -->
                 </div>
                 <div>
                     <div class="modal">
                         <div class="ticket">
                             <div class="ticket-img">
                             </div>
-                            <div class="ticket-content">예매확인:</div>
+                            <div class="ticket-content">
+                                <img class="ticket-movieImg"></img>
+                                <div class="ticket-movieTitle"></div>
+                                <div class="ticket-movieSeats"></div>
+                            </div>
                             <button id="btnCancel">예매취소</button>
                         </div>
                     </div>
