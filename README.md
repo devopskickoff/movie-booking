@@ -1,5 +1,5 @@
 # movie-booking
-바닐라 자바스크립트로 만드는 영화예매 미니 프로젝트
+바닐라 자바스크립트로 만드는 영화예매 프로젝트
 
 ![1](https://user-images.githubusercontent.com/84078481/124159443-22678c00-dad6-11eb-9b50-e50287cd5044.png)
 ![2](https://user-images.githubusercontent.com/84078481/124159447-2398b900-dad6-11eb-8e90-3886d6841da6.png)
