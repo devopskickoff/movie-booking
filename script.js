@@ -3,30 +3,32 @@ let coco = ["Y"];
 let frozen = ["A", "B"];
 let myMovie = [];
 
-
-//예약정보가 있으면 바로 모달로 티켓을 볼 수 있도록함
+//초기에는 모달이 안보이고 로컬스토리지에서 예약정보가 있으면 모달로 티켓을 볼 수 있도록함
 function loadModal(){
-  //초기에는 모달 안보임
   var modal = document.getElementsByClassName("modal")[0];
-  // 로컬 스토리지에 내 예약내역이 있으면 모달을 보이게
   var myMovie = localStorage.getItem("myMovie");  
   if(myMovie){
-    let ticketMovieImg = document.getElementsByClassName("ticket-movieImg")[0];
-    let ticketMovieTitle = document.getElementsByClassName("ticket-movieTitle")[0];
-    let ticketMovieSeats= document.getElementsByClassName("ticket-movieSeats")[0];
-    var myMovie = JSON.parse(myMovie);
-    var myMovieTitle = myMovie['movieTitle'];
-    ticketMovieImg.style.backgroundImage = `url('img/${myMovieTitle}.jpg')`;
-    var myMovieSeat = myMovie['seat'];    
-    ticketMovieTitle.textContent = myMovieTitle;
-    ticketMovieSeats.textContent = ""; 
-    for(var i =0;i<myMovieSeat.length;i++){
-      ticketMovieSeats.textContent += myMovieSeat[i]+"석 ";
-    }
+    loadStorageObj(myMovie);
     modal.style.display = "block";
   } else {
     modal.style.display = "none";
     loadSeatList();  
+  }
+}
+
+//예약내역이 있으면 로컬스토리지에서 값을 가져온다
+function loadStorageObj(myMovie){
+  let ticketMovieImg = document.getElementsByClassName("ticket-movieImg")[0];
+  let ticketMovieTitle = document.getElementsByClassName("ticket-movieTitle")[0];
+  let ticketMovieSeats= document.getElementsByClassName("ticket-movieSeats")[0];
+  var myMovie = JSON.parse(myMovie);
+  var myMovieTitle = myMovie['movieTitle'];
+  ticketMovieImg.style.backgroundImage = `url('img/${myMovieTitle}.jpg')`;
+  var myMovieSeat = myMovie['seat'];    
+  ticketMovieTitle.textContent = myMovieTitle;
+  ticketMovieSeats.textContent = ""; 
+  for(var i =0;i<myMovieSeat.length;i++){
+    ticketMovieSeats.textContent += myMovieSeat[i]+"석 ";
   }
 }
 
